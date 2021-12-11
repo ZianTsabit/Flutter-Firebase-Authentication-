@@ -17,32 +17,28 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   Duration get loginTime => Duration(milliseconds: 2250);
 
-  // Future<String> _authUser(LoginData data) {
-  //   debugPrint('Name: ${data.name}, Password: ${data.password}');
-  //   return Future.delayed(loginTime).then((_) {
-  //     if (!users.containsKey(data.name)) {
-  //       return 'User not exists';
-  //     }
-  //     if (users[data.name] != data.password) {
-  //       return 'Password does not match';
-  //     }
-  //     return null;
-  //   });
-  // }
-
   Future<String> _signupUser(LoginData data) {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      Provider.of<Auth>(context, listen: false)
-          .signup(data.name, data.password);
+    return Future.delayed(loginTime).then((_) async {
+      try {
+        await Provider.of<Auth>(context, listen: false)
+            .signup(data.name, data.password);
+      } catch (err) {
+        return err.toString();
+      }
       return null;
     });
   }
 
   Future<String> _authUserLogin(LoginData data) {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      Provider.of<Auth>(context, listen: false).login(data.name, data.password);
+    return Future.delayed(loginTime).then((_) async {
+      try {
+        await Provider.of<Auth>(context, listen: false)
+            .login(data.name, data.password);
+      } catch (err) {
+        return err.toString();
+      }
       return null;
     });
   }

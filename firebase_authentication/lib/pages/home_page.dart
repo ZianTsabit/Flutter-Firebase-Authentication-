@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
     final prov = Provider.of<Products>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("All Products"),
+        title: Text("My Book"),
         actions: [
           IconButton(
             icon: Icon(Icons.add),

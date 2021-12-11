@@ -35,7 +35,7 @@ class AddProductPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Product"),
+        title: Text("Add Book"),
         actions: [
           IconButton(
             icon: Icon(Icons.save),
