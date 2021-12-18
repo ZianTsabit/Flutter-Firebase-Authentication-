@@ -61,9 +61,7 @@ class _LoginPageState extends State<LoginPage> {
       onLogin: _authUserLogin,
       onSignup: _signupUser,
       onSubmitAnimationCompleted: () {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ));
+        Provider.of<Auth>(context, listen: false).tempData();
       },
       onRecoverPassword: _recoverPassword,
     );
