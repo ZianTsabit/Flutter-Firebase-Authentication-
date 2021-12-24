@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (context, i) => ProductItem(
                     prov.allProduct[i].id,
                     prov.allProduct[i].title,
-                    prov.allProduct[i].price,
+                    prov.allProduct[i].author,
                     prov.allProduct[i].updatedAt,
                   ),
                 ),

@@ -7,14 +7,14 @@ class AddProductPage extends StatelessWidget {
   static const route = "/add-product";
 
   final TextEditingController titleController = TextEditingController();
-  final TextEditingController priceController = TextEditingController();
+  final TextEditingController authorController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    void save(String title, String price) {
+    void save(String title, String author) {
       try {
         Provider.of<Products>(context, listen: false)
-            .addProduct(title, price)
+            .addProduct(title, author)
             .then((value) => Navigator.pop(context));
       } catch (err) {
         showDialog(
@@ -41,7 +41,7 @@ class AddProductPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.save),
-            onPressed: () => save(titleController.text, priceController.text),
+            onPressed: () => save(titleController.text, authorController.text),
           ),
         ],
       ),
@@ -58,7 +58,7 @@ class AddProductPage extends StatelessWidget {
                   controller: titleController,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    labelText: "Product Name",
+                    labelText: "Book Title",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -67,11 +67,10 @@ class AddProductPage extends StatelessWidget {
                 SizedBox(height: 20),
                 TextField(
                   autocorrect: false,
-                  controller: priceController,
-                  keyboardType: TextInputType.number,
+                  controller: authorController,
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
-                    labelText: "Price",
+                    labelText: "Author",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -84,7 +83,7 @@ class AddProductPage extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 30),
               child: ElevatedButton(
                 onPressed: () =>
-                    save(titleController.text, priceController.text),
+                    save(titleController.text, authorController.text),
                 child: Text(
                   "Save",
                   style: TextStyle(

@@ -19,7 +19,7 @@ class Products with ChangeNotifier {
 
   List<Product> get allProduct => _allProduct;
 
-  Future<void> addProduct(String title, String price) async {
+  Future<void> addProduct(String title, String author) async {
     Uri url = Uri.parse("$urlMaster/products.json?auth=$token");
     DateTime dateNow = DateTime.now();
     try {
@@ -27,7 +27,7 @@ class Products with ChangeNotifier {
         url,
         body: json.encode({
           "title": title,
-          "price": price,
+          "price": author,
           "createdAt": dateNow.toString(),
           "updatedAt": dateNow.toString(),
         }),
@@ -39,7 +39,7 @@ class Products with ChangeNotifier {
         Product data = Product(
           id: json.decode(response.body)["name"].toString(),
           title: title,
-          price: price,
+          author: author,
           createdAt: dateNow,
           updatedAt: dateNow,
         );
@@ -52,7 +52,7 @@ class Products with ChangeNotifier {
     }
   }
 
-  void editProduct(String id, String title, String price) async {
+  void editProduct(String id, String title, String author) async {
     Uri url = Uri.parse("$urlMaster/products/$id.json?auth=$token");
     DateTime date = DateTime.now();
     try {
@@ -60,7 +60,7 @@ class Products with ChangeNotifier {
         url,
         body: json.encode({
           "title": title,
-          "price": price,
+          "price": author,
           "updatedAt": date.toString(),
         }),
       );
@@ -70,7 +70,7 @@ class Products with ChangeNotifier {
       } else {
         Product edit = _allProduct.firstWhere((element) => element.id == id);
         edit.title = title;
-        edit.price = price;
+        edit.author = author;
         edit.updatedAt = date;
         notifyListeners();
       }
@@ -116,7 +116,7 @@ class Products with ChangeNotifier {
               Product prod = Product(
                 id: key,
                 title: value["title"],
-                price: value["price"],
+                author: value["author"],
                 createdAt:
                     DateFormat("yyyy-mm-dd hh:mm:ss").parse(value["createdAt"]),
                 updatedAt:

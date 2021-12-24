@@ -16,21 +16,21 @@ class EditProductPage extends StatelessWidget {
 
     final TextEditingController titleController =
         TextEditingController(text: selectedProduct.title);
-    final TextEditingController priceController =
-        TextEditingController(text: selectedProduct.price);
+    final TextEditingController authorController =
+        TextEditingController(text: selectedProduct.author);
 
-    void edit(String title, String price) {
-      prov.editProduct(prodId, title, price);
+    void edit(String title, String author) {
+      prov.editProduct(prodId, title, author);
       Navigator.pop(context);
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Product"),
+        title: Text("Edit Book"),
         actions: [
           IconButton(
             icon: Icon(Icons.save),
-            onPressed: () => edit(titleController.text, priceController.text),
+            onPressed: () => edit(titleController.text, authorController.text),
           ),
         ],
       ),
@@ -47,7 +47,7 @@ class EditProductPage extends StatelessWidget {
                   controller: titleController,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    labelText: "Product Name",
+                    labelText: "Book Title",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -56,11 +56,10 @@ class EditProductPage extends StatelessWidget {
                 SizedBox(height: 20),
                 TextField(
                   autocorrect: false,
-                  controller: priceController,
-                  keyboardType: TextInputType.number,
+                  controller: authorController,
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
-                    labelText: "Price",
+                    labelText: "Author",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -73,7 +72,7 @@ class EditProductPage extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 30),
               child: ElevatedButton(
                 onPressed: () =>
-                    edit(titleController.text, priceController.text),
+                    edit(titleController.text, authorController.text),
                 child: Text(
                   "Edit",
                   style: TextStyle(
